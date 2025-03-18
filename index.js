@@ -10,9 +10,11 @@ const app = express();
 const port = process.env.PORT || 3000;
 
 const URL =
-  "https://www.linkedin.com/jobs/search/?keywords=Frontend%20Developer&location=India&f_TPR=r86400&sortBy=DD";
+  "https://www.linkedin.com/jobs/search/?currentJobId=4187607919&f_C=1586&f_E=2%2C3%2C4&f_TPR=r86400&keywords=software%20engineer&location=hyderabad%2C%20telangana%2C%20india&origin=JOB_SEARCH_PAGE_JOB_FILTER&sortBy=DD";
 const TELEGRAM_BOT_TOKEN = "8046049755:AAHBcHtFRQ3q_0x0DvmgNVZ6r0FHhNqpqEA";
-const TELEGRAM_CHAT_ID = "6410640034";
+const TELEGRAM_CHAT_ID_SAURABH = "6410640034";
+const TELEGRAM_CHAT_ID_AMAN = "1155907721";
+const TELEGRAM_CHAT_ID_RAHUL = "1378684374";
 const JOBS_FILE = "jobs.json";
 
 // ✅ Telegram Message Sender
@@ -20,7 +22,17 @@ const sendTelegramMessage = async (message) => {
   const url = `https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage`;
   try {
     await axios.post(url, {
-      chat_id: TELEGRAM_CHAT_ID,
+      chat_id: TELEGRAM_CHAT_ID_SAURABH,
+      text: message,
+      parse_mode: "Markdown",
+    });
+    await axios.post(url, {
+      chat_id: TELEGRAM_CHAT_ID_AMAN,
+      text: message,
+      parse_mode: "Markdown",
+    });
+    await axios.post(url, {
+      chat_id: TELEGRAM_CHAT_ID_RAHUL,
       text: message,
       parse_mode: "Markdown",
     });
