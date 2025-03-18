@@ -25,10 +25,10 @@ jobs:
       - name: Build and Push Docker Image
         run: |
           IMAGE_TAG=${{ github.sha }}
-          docker build -t **saurabhsen12/myapp:$IMAGE_TAG** .  # ✅ Replace 'mydockerhubusername' with your Docker Hub username
-          docker tag **mydockerhubusername/myapp:$IMAGE_TAG** **mydockerhubusername/myapp:latest**
-          docker push **mydockerhubusername/myapp:$IMAGE_TAG**
-          docker push **mydockerhubusername/myapp:latest**
+          docker build -t saurabhsen12/likedin-scrapper:$IMAGE_TAG .  # ✅ Replace 'mydockerhubusername' with your Docker Hub username
+          docker tag saurabhsen12/likedin-scrapper:$IMAGE_TAG saurabhsen12/likedin-scrapper:latest
+          docker push saurabhsen12/likedin-scrapper:$IMAGE_TAG
+          docker push saurabhsen12/likedin-scrapper:latest
 
       # Step 4: Trigger Render Deployment (🔹 Change the Deploy Hook URL)
       - name: Trigger Render Deploy
