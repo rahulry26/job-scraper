@@ -1,0 +1,36 @@
+name: Deploy to Render
+
+on:
+  push:
+    branches:
+      - main  # ✅ Change this to your target branch if needed
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      # Step 1: Checkout the GitHub repo
+      - name: Checkout Repository
+        uses: actions/checkout@v3
+
+      # Step 2: Log in to Docker Hub (🔹 Change Docker Hub credentials)
+      - name: Log in to Docker Hub
+        uses: docker/login-action@v3
+        with:
+          username: ${{ secrets.saurabhsen12 }}  # ✅ Ensure this secret is set in GitHub
+          password: ${{ secrets.dckr_pat_cwDxit_mFHapNEFHRvFticqWXVg }}     # ✅ Ensure this secret is set in GitHub
+
+      # Step 3: Build and Push Docker Image (🔹 Change Docker Hub repository name)
+      - name: Build and Push Docker Image
+        run: |
+          IMAGE_TAG=${{ github.sha }}
+          docker build -t **saurabhsen12/myapp:$IMAGE_TAG** .  # ✅ Replace 'mydockerhubusername' with your Docker Hub username
+          docker tag **mydockerhubusername/myapp:$IMAGE_TAG** **mydockerhubusername/myapp:latest**
+          docker push **mydockerhubusername/myapp:$IMAGE_TAG**
+          docker push **mydockerhubusername/myapp:latest**
+
+      # Step 4: Trigger Render Deployment (🔹 Change the Deploy Hook URL)
+      - name: Trigger Render Deploy
+        run: |
+          curl -X POST ${{ secrets.https://api.render.com/deploy/srv-cvboejofnakc73dn45pg?key=nJVIJdmHZ84 }}  # ✅ Ensure this secret contains your Render Deploy Hook URL
